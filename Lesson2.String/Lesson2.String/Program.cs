@@ -6,49 +6,44 @@ using System.Threading.Tasks;
 
 namespace Lesson2.String
 {
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            string s1;
-            int temp = 0;
-            int k = 0;
-            Console.WriteLine("Введите предложение с двойными пробелами!");
-            s1 = Console.ReadLine();
-            Console.WriteLine("Вы написали: \n{0}", s1);
-            List<char> list = new List<char> { };
+	internal class Program
+	{
+		static void Main(string[] args)
+		{
+			int counterDelete = 0;
+			int temp = 0;
+			Console.WriteLine("Введите предложение с двойными пробелами!");
+			string original = Console.ReadLine();
+			Console.WriteLine("Вы написали: \n{0}", original);
+			List<char> list = original.ToList();
 
-            foreach(var c in s1)
-            {
-                list.Add(c);
-            }
+			for (int j = 0; j < list.Count; j++)
+			{
+				for (int i = 0; i < list.Count; i++)
+				{
+					temp++;
+					if (list[i] == ' ')
+					{
+						if (list[i] == list[i + 1])
+						{
+							list.RemoveAt(i + 1);
+							counterDelete++;
+						}
+					}
+				}
+			}
 
-            for (int j = 0; j < list.Count; j++) 
-            {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    if (list[i] == ' ')
-                    {
-                        if (list[i] == list[i + 1])
-                        {
-                            list.RemoveAt(i + 1);
-                            temp++;
-                        }
-                    }
-                }
-            }
+			Console.WriteLine($"Количество символов в строке {original.Length}");
+			Console.WriteLine($"Количество проходов = {temp}");
 
-            Console.WriteLine("За все итерации преобразовано двойных пробелов = {0} \n\nУУдалим двойные пробелы и получим " +
-                "следующий результат:", temp);
+			Console.WriteLine("За все итерации преобразовано двойных пробелов = {0} \n\nУдалим двойные пробелы и получим " +
+				"следующий результат:", counterDelete);
 
-            foreach(char c in list)
-            {
-                Console.Write(c);
-            }
+			Console.WriteLine($"\"{new string(list.ToArray())}\"");
 
-            Console.ReadKey();
+			Console.ReadKey();
 
 
-        }
-    }
+		}
+	}
 }
