@@ -17,20 +17,17 @@ namespace Lesson2.String
 			Console.WriteLine("Вы написали: \n{0}", original);
 			List<char> list = original.ToList();
 
-			for (int j = 0; j < list.Count; j++)
+			for (int i = 0; i < list.Count; i++)
 			{
-				for (int i = 0; i < list.Count; i++)
+				if (list[i] == ' ')
 				{
-					temp++;
-					if (list[i] == ' ')
+					while (list[i + 1] == ' ')
 					{
-						if (list[i] == list[i + 1])
-						{
-							list.RemoveAt(i + 1);
-							counterDelete++;
-						}
+						list.RemoveAt(i + 1);
+						counterDelete++;
 					}
 				}
+				temp++;
 			}
 
 			Console.WriteLine($"Количество символов в строке {original.Length}");

@@ -10,35 +10,35 @@ namespace ConsoleApp1
 	{
 		static void Main(string[] args)
 		{
-			int[] array = new int[] { -7, 1, 5, 2, -4, 3, 0};
-			int leftSum = 0;
-			int rightSum = 0;
-			int iterationCount = 0;
+			int[] array = new int[] {-7, 1, 5, 2, -4, 3, 0 };
+			int leftSum = array[0];
+			int rightSum = array.Skip(2).Sum();
+			int iterationCount = 1;
+			int temp = 0;
 
-			for (int k = 1; k < array.Length-1; k++)
+			if (leftSum == rightSum)
 			{
-				leftSum = 0;
-				rightSum = 0;
-				iterationCount++;
-
-				for (int i = 0; i < k; i++)
+				Console.WriteLine($"Элемент массива с равнозначной суммой левой и правой частей массива = {iterationCount}");
+				Console.ReadKey();
+			}
+			else
+			{
+				for (int i = 2; i < array.Length; i++)
 				{
-					leftSum += array[i];
-				}
+					temp++;
+					iterationCount++;
+					leftSum += array[i - 1];
+					rightSum -= array[iterationCount];
 
-				for (int j = array.Length - 1; j > k; j--)
-				{
-					rightSum += array[j];
-				}
-
-				if (leftSum == rightSum)
-				{
-					Console.WriteLine("Элемент массива с равнозначной суммой левой и праввой частей массива = {0}", iterationCount);
-					break;
+					if (leftSum == rightSum)
+					{
+						Console.WriteLine($"Элемент массива с равнозначной суммой левой и праввой частей массива = {iterationCount}");
+						Console.WriteLine($"Количество итераций = {temp}");
+						break;
+					}
 				}
 			}
 
-			
 			Console.ReadKey();
 		}
 	}
